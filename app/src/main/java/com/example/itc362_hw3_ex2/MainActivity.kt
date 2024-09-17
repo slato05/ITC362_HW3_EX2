@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //use setOnClickListener on previousButton to allow backwards movement
+        /*
         binding.previousButton.setOnClickListener {
             if (currentIndex == 0) //if on first question
                 currentIndex = questionBank.size - 1 //set currentIndex to last question index
@@ -49,16 +50,21 @@ class MainActivity : AppCompatActivity() {
                 currentIndex = (currentIndex - 1) % questionBank.size
             updateQuestion()
         }
+        */
 
         binding.questionTextView.setOnClickListener {
             currentIndex = (currentIndex + 1) % questionBank.size
             updateQuestion()
         }
+
     }
 
     private fun updateQuestion(){
         val questionTextResId = questionBank[currentIndex].textResId
         binding.questionTextView.setText(questionTextResId)
+
+        binding.trueButton.isEnabled = true
+        binding.falseButton.isEnabled = true
     }
 
     private fun checkAnswer(userAnswer:Boolean) {
@@ -72,6 +78,9 @@ class MainActivity : AppCompatActivity() {
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
             .show()
+
+        binding.trueButton.isEnabled = false
+        binding.falseButton.isEnabled = false
     }
 
     override fun onStart() {
